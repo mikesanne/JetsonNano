@@ -7,42 +7,43 @@ The Overlay was adapted from a combination of the Seeed-linux-dtoverlays reposit
 ## How to Use
 
 Step 1: Clone this repo
-'''
+```
 git clone https://github.com/mikesanne/JetsonNano.git 
 cd JetsonNano
-'''
+```
 
 Step 2: Run the makefile
-'''
+```
 make overlays/jetsonnano/jetson-mcp251x_new.dtbo 
-'''
+```
 
 Step 3: Remove the existing mcp251x overlays in /boot/ 
-'''
-Remove tegra210-p3448-0000-p3449-0000-a01-mcp251x.dtbo and tegra210-p3448-0000-p3449-0000-a02-mcp251x.dtbo from boot
-'''
+```
+sudo rm /boot/tegra210-p3448-0000-p3449-0000-a01-mcp251x.dtbo
+sudo rm /boot/tegra210-p3448-0000-p3449-0000-a02-mcp251x.dtbo
+```
 This is required otherwise there will be a name conflict preventing you from running jetson-io
 
 Step 4: Add jetson-mcp251x_new.dtbo to /boot/
-'''
+```
 cd overlays/jetsonnano/
 sudo cp jetson-mcp251x_new.dtbo /boot/
-'''
+```
 
 Step 5: Run jetson-io and configure for MCP251x
-'''
+```
 sudo /opt/nvidia/jetson-io/jetsion-io.py
 
 Configure Jetson for compatible hardware
 MCP251x CAN Controller
 Save and reboot to reconfigure pins
-'''
+```
 
 Step 6: Bring Up CAN interface
-'''
+```
 sudo ip link set can0 up type can bitrate 500000
 sudo ip link set can1 up type can bitrate 500000
-'''
+```
 
 Note: This repository is designed to be used with Jetson Nano and MCP251x
 	The interrupt pins used are Pin31 and Pin32 for INT 1 and INT 2 respectively.
