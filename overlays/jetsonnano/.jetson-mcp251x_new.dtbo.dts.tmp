@@ -1,0 +1,159 @@
+# 1 "overlays/jetsonnano/jetson-mcp251x_new.dts"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 1 "overlays/jetsonnano/jetson-mcp251x_new.dts"
+# 11 "overlays/jetsonnano/jetson-mcp251x_new.dts"
+/dts-v1/;
+/plugin/;
+
+# 1 "include/dt-bindings/pinctrl/pinctrl-tegra.h" 1
+# 15 "overlays/jetsonnano/jetson-mcp251x_new.dts" 2
+# 1 "include/dt-bindings/gpio/tegra-gpio.h" 1
+# 13 "include/dt-bindings/gpio/tegra-gpio.h"
+# 1 "include/dt-bindings/gpio/gpio.h" 1
+# 14 "include/dt-bindings/gpio/tegra-gpio.h" 2
+# 16 "overlays/jetsonnano/jetson-mcp251x_new.dts" 2
+
+/ {
+ overlay-name = "MCP251x CAN Controller";
+ compatible = "nvidia,p3449-0000-b00+p3448-0000-b00\0nvidia,p3449-0000-a02+p3448-0000-a02";
+
+
+
+    fragment@0 {
+  target-path = "/";
+  __overlay__ {
+   clocks {
+    can_clock: can_clock {
+     compatible = "fixed-clock";
+     #clock-cells = <0>;
+     clock-frequency = <16000000>;
+     clock-accuracy = <100>;
+    };
+   };
+  };
+ };
+
+ fragment@1 {
+  target = <&spi0>;
+  __overlay__ {
+   #address-cells = <1>;
+   #size-cells = <0>;
+   spi@0 {
+    status = "okay";
+    compatible = "microchip,mcp2515";
+    reg = <0x0>;
+    spi-max-frequency = <10000000>;
+    nvidia,enable-hw-based-cs;
+    nvidia,rx-clk-tap-delay = <0x7>;
+    clocks = <&can_clock>;
+    interrupt-parent = <&gpio>;
+    interrupts = <((25 * 8) + 0) 0x1>;
+    controller-data {
+     nvidia,cs-setup-clk-count = <0x1e>;
+     nvidia,cs-hold-clk-count = <0x1e>;
+     nvidia,rx-clk-tap-delay = <0x1f>;
+     nvidia,tx-clk-tap-delay = <0x0>;
+    };
+   };
+   spi@1 {
+    status = "disabled";
+   };
+  };
+ };
+
+ fragment@2 {
+  target = <&spi1>;
+  __overlay__ {
+   #address-cells = <1>;
+   #size-cells = <0>;
+   spi@0 {
+    status = "disabled";
+   };
+   spi@1 {
+    status = "okay";
+    compatible = "microchip,mcp2515";
+    reg = <0x0>;
+    spi-max-frequency = <10000000>;
+    nvidia,enable-hw-based-cs;
+    nvidia,rx-clk-tap-delay = <0x7>;
+    clocks = <&can_clock>;
+    interrupt-parent = <&gpio>;
+    interrupts = <((21 * 8) + 0) 0x1>;
+    controller-data {
+     nvidia,cs-setup-clk-count = <0x1e>;
+     nvidia,cs-hold-clk-count = <0x1e>;
+     nvidia,rx-clk-tap-delay = <0x1f>;
+     nvidia,tx-clk-tap-delay = <0x0>;
+    };
+   };
+  };
+ };
+
+ fragment@3 {
+  target = <&pinmux>;
+  __overlay__ {
+   pinctrl-names = "default";
+   pinctrl-0 = <&hdr40_pinmux>;
+
+   hdr40_pinmux: header-40pin-pinmux {
+    pin19 {
+     nvidia,pins = "spi1_mosi_pc0";
+     nvidia,function = "spi1";
+     nvidia,pull = <1>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+    pin21 {
+     nvidia,pins = "spi1_miso_pc1";
+     nvidia,function = "spi1";
+     nvidia,pull = <1>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+    pin23 {
+     nvidia,pins = "spi1_sck_pc2";
+     nvidia,function = "spi1";
+     nvidia,pull = <1>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+    pin24 {
+     nvidia,pins = "spi1_cs0_pc3";
+     nvidia,function = "spi1";
+     nvidia,pull = <2>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+    pin37 {
+     nvidia,pins = "spi2_mosi_pb4";
+     nvidia,function = "spi2";
+     nvidia,pull = <1>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+    pin22 {
+     nvidia,pins = "spi2_miso_pb5";
+     nvidia,function = "spi2";
+     nvidia,pull = <1>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+    pin13 {
+     nvidia,pins = "spi2_sck_pb6";
+     nvidia,function = "spi2";
+     nvidia,pull = <1>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+    pin18 {
+     nvidia,pins = "spi2_cs0_pb7";
+     nvidia,function = "spi2";
+     nvidia,pull = <2>;
+     nvidia,tristate = <0>;
+     nvidia,enable-input = <1>;
+    };
+   };
+  };
+ };
+};
