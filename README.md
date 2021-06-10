@@ -49,7 +49,7 @@ Note: This repository is designed to be used with Jetson Nano and MCP251x
 	The interrupt pins used are Pin31 and Pin32 for INT 1 and INT 2 respectively.
 
 ## Making Changes
-All changes to the configuration can be made in the file overlays/jetsonnano/jetson-mcp251x_new.dts
+All changes to the configuration can be made in the file overlays/jetsonnano/jetson-mcp251x.dts
 
 In order to adjust for the oscillator speed please edit the dts file under fragment@0. Change the clock-frequency to the required clock frequency on line 30 of the file.
 
