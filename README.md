@@ -1,6 +1,6 @@
 This repository contains a CAN MCP2515 Overlay for the Nvidia Jetson Nano
 
-The Overlay was adapted from a combination of the Seeed-linux-dtoverlays repository as well as the jetson-mcp251x.dts source found in the Linux_for_Tegra source files.
+The Overlay was adapted from a combination of the Seeed-linux-dtoverlays repository as well as the jetson-mcp251x.dts source found in the Linux_for_Tegra source files. The makefile has been adapted from Seeed-linux-dtoverlays.
 
 How to Use
 
