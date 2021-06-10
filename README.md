@@ -14,7 +14,7 @@ cd JetsonNano
 
 Step 2: Run the makefile
 ```
-make overlays/jetsonnano/jetson-mcp251x_new.dtbo 
+make overlays/jetsonnano/jetson-mcp251x.dtbo 
 ```
 
 Step 3: Remove the existing mcp251x overlays in /boot/ 
@@ -27,7 +27,7 @@ This is required otherwise there will be a name conflict preventing you from run
 Step 4: Add jetson-mcp251x_new.dtbo to /boot/
 ```
 cd overlays/jetsonnano/
-sudo cp jetson-mcp251x_new.dtbo /boot/
+sudo cp jetson-mcp251x.dtbo /boot/
 ```
 
 Step 5: Run jetson-io and configure for MCP251x
