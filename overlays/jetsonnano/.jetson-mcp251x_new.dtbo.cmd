@@ -1,5 +1,0 @@
-cmd_overlays/jetsonnano/jetson-mcp251x_new.dtbo = cpp -Wp,-MD,overlays/jetsonnano/.jetson-mcp251x_new.dtbo.d.pre.tmp -nostdinc -Iinclude -Ioverlays/jetsonnano -Ioverlays -Itestcase-data -undef -D__DTS__ -x assembler-with-cpp -o overlays/jetsonnano/.jetson-mcp251x_new.dtbo.dts.tmp overlays/jetsonnano/jetson-mcp251x_new.dts ; dtc -O dtb -o overlays/jetsonnano/jetson-mcp251x_new.dtbo -b 0 -@ -i overlays/jetsonnano -iinclude -Wno-unit_address_vs_reg -Wno-dmas_property -Wno-gpios_property -Wno-pwms_property -Wno-interrupts_property -d overlays/jetsonnano/.jetson-mcp251x_new.dtbo.d.dtc.tmp overlays/jetsonnano/.jetson-mcp251x_new.dtbo.dts.tmp ; cat overlays/jetsonnano/.jetson-mcp251x_new.dtbo.d.pre.tmp overlays/jetsonnano/.jetson-mcp251x_new.dtbo.d.dtc.tmp > overlays/jetsonnano/.jetson-mcp251x_new.dtbo.d
-jetson-mcp251x_new.o: overlays/jetsonnano/jetson-mcp251x_new.dts \
- include/dt-bindings/pinctrl/pinctrl-tegra.h \
- include/dt-bindings/gpio/tegra-gpio.h include/dt-bindings/gpio/gpio.h
-overlays/jetsonnano/jetson-mcp251x_new.dtbo: overlays/jetsonnano/.jetson-mcp251x_new.dtbo.dts.tmp
